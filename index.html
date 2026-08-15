@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafe Crew — Navi Mumbai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#241209;
+    --espresso-2:#33190d;
+    --parchment:#f4e8d0;
+    --parchment-2:#ece0c6;
+    --mustard:#e3a23c;
+    --rust:#c1502e;
+    --green:#43593f;
+    --cream:#f6ecd9;
+    --ink:#241209;
+    --line: rgba(244,232,208,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--espresso);
+    color:var(--cream);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .script{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    line-height:0.95;
+  }
+  .eyebrow{
+    font-family:'DM Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:0.72rem;
+    color:var(--mustard);
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(36,18,9,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px;}
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand .cup{font-size:1.6rem;}
+  .brand-name{font-family:'Caveat',cursive; font-weight:700; font-size:1.7rem; color:var(--parchment);}
+  .navlinks{display:flex; gap:28px; font-size:0.9rem; font-weight:500;}
+  .navlinks a{opacity:0.85; text-decoration:none; transition:opacity .2s, color .2s;}
+  .navlinks a:hover{opacity:1; color:var(--mustard);}
+  .navlinks a:focus-visible, a:focus-visible{outline:2px solid var(--mustard); outline-offset:3px;}
+  .nav-cta{
+    background:var(--rust); color:var(--cream); border:none;
+    padding:10px 18px; border-radius:999px; font-weight:600; font-size:0.85rem;
+    cursor:pointer; text-decoration:none; display:inline-block;
+  }
+  .navlinks-mobile{display:none;}
+  @media (max-width:760px){
+    .navlinks{display:none;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:96px 24px 70px;
+    text-align:center;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(227,162,60,0.16), transparent 70%),
+      var(--espresso);
+  }
+  .steam{
+    position:absolute; top:-40px; left:50%; transform:translateX(-50%);
+    width:260px; height:260px; opacity:0.5; pointer-events:none;
+  }
+  .hero .eyebrow{margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(3.4rem, 10vw, 7rem);
+    color:var(--parchment);
+    letter-spacing:0.01em;
+  }
+  .hero h1 span{color:var(--rust);}
+  .hero p.tag{
+    max-width:520px; margin:22px auto 0;
+    font-size:1.05rem; color:rgba(246,236,217,0.78); line-height:1.6;
+  }
+  .hero-ctas{margin-top:36px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 26px; border-radius:999px; font-weight:600; font-size:0.92rem;
+    text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform .15s ease, background .2s;
+  }
+  .btn-primary{background:var(--rust); color:var(--cream);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border-color:rgba(246,236,217,0.35); color:var(--parchment);}
+  .btn-ghost:hover{background:rgba(246,236,217,0.08); transform:translateY(-2px);}
+
+  /* ===== MARQUEE ===== */
+  .marquee{
+    background:var(--mustard); color:var(--espresso);
+    padding:11px 0; overflow:hidden; white-space:nowrap;
+    border-top:1px solid var(--espresso); border-bottom:1px solid var(--espresso);
+  }
+  .marquee-track{display:inline-block; padding-left:100%; animation:scroll-left 32s linear infinite;}
+  .marquee span{font-family:'DM Mono',monospace; font-size:0.82rem; font-weight:500; letter-spacing:0.03em; margin:0 22px;}
+  @keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-100%);} }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  section{padding:88px 0;}
+  .sec-head{text-align:center; max-width:640px; margin:0 auto 52px;}
+  .sec-head h2{font-size:clamp(2.4rem,5vw,3.4rem); color:var(--parchment); margin-top:10px;}
+  .sec-head p{color:rgba(246,236,217,0.7); margin-top:14px; font-size:1rem; line-height:1.6;}
+
+  /* ===== LOCATIONS ===== */
+  .locations{background:var(--espresso-2);}
+  .loc-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  @media (max-width:800px){ .loc-grid{grid-template-columns:1fr;} }
+  .loc-card{
+    background:var(--parchment); color:var(--ink);
+    border-radius:18px; padding:32px; position:relative;
+    box-shadow:0 20px 40px -20px rgba(0,0,0,0.5);
+  }
+  .loc-card .tab{
+    position:absolute; top:-14px; left:28px;
+    background:var(--rust); color:var(--cream);
+    font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.1em;
+    text-transform:uppercase; padding:6px 12px; border-radius:6px;
+  }
+  .loc-card h3{font-size:2.1rem; color:var(--espresso); margin-top:10px;}
+  .loc-row{display:flex; gap:12px; margin-top:16px; font-size:0.92rem; line-height:1.55;}
+  .loc-row .ic{flex:0 0 18px; margin-top:2px; opacity:0.7;}
+  .loc-row strong{display:block; font-weight:600;}
+  .loc-meta{display:flex; gap:18px; margin-top:20px; flex-wrap:wrap;}
+  .meta-chip{
+    background:rgba(36,18,9,0.06); border:1px solid rgba(36,18,9,0.12);
+    border-radius:10px; padding:10px 14px; font-size:0.82rem; flex:1; min-width:120px;
+  }
+  .meta-chip b{display:block; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--rust); margin-bottom:3px;}
+  .loc-specials{margin-top:18px; font-size:0.88rem; color:rgba(36,18,9,0.8); line-height:1.6;}
+  .loc-specials b{color:var(--espresso);}
+  .loc-actions{margin-top:22px; display:flex; gap:10px; flex-wrap:wrap;}
+  .loc-actions a{
+    font-size:0.82rem; font-weight:600; padding:9px 16px; border-radius:999px;
+    text-decoration:none; border:1px solid var(--espresso); color:var(--espresso);
+  }
+  .loc-actions a.solid{background:var(--espresso); color:var(--cream);}
+
+  /* ===== SPECIALITIES ===== */
+  .specials-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:16px; overflow:hidden;
+    margin-top:56px;
+  }
+  @media (max-width:760px){ .specials-strip{grid-template-columns:repeat(2,1fr);} }
+  .spec-item{background:var(--espresso); padding:26px 18px; text-align:center;}
+  .spec-item .num{font-family:'DM Mono',monospace; font-size:0.72rem; color:var(--mustard); letter-spacing:0.1em;}
+  .spec-item h4{font-family:'Caveat',cursive; font-size:1.5rem; color:var(--parchment); margin-top:8px;}
+  .spec-item p{font-size:0.78rem; color:rgba(246,236,217,0.6); margin-top:4px;}
+
+  /* ===== MENU (receipt ticket) ===== */
+  .menu-section{background:var(--espresso);}
+  .menu-toggle{
+    display:flex; justify-content:center; gap:0; margin:0 auto 48px;
+    width:fit-content; background:rgba(246,236,217,0.08); border-radius:999px; padding:5px;
+  }
+  .menu-toggle button{
+    font-family:'DM Mono',monospace; font-size:0.82rem; font-weight:500; letter-spacing:0.05em;
+    text-transform:uppercase; padding:11px 26px; border-radius:999px; border:none;
+    background:transparent; color:rgba(246,236,217,0.6); cursor:pointer; transition:all .25s;
+  }
+  .menu-toggle button.active{background:var(--mustard); color:var(--espresso);}
+
+  .ticket-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
+  @media (max-width:760px){ .ticket-grid{grid-template-columns:1fr;} }
+
+  .ticket{
+    background:var(--parchment); color:var(--ink);
+    padding:26px 26px 22px; position:relative;
+    box-shadow:0 18px 34px -18px rgba(0,0,0,0.55);
+    -webkit-mask-image: linear-gradient(black, black);
+  }
+  .ticket::before, .ticket::after{
+    content:""; position:absolute; left:0; right:0; height:12px;
+    background-image: radial-gradient(circle at 8px 6px, var(--espresso) 6px, transparent 7px);
+    background-size: 18px 12px; background-repeat:repeat-x;
+  }
+  .ticket::before{ top:-6px; }
+  .ticket::after{ bottom:-6px; transform:rotate(180deg); }
+  .ticket h3{font-size:2rem; color:var(--espresso); margin-bottom:2px;}
+  .ticket .sub{font-family:'DM Mono',monospace; font-size:0.72rem; color:var(--rust); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px; display:block;}
+  .item-row{
+    display:flex; align-items:baseline; gap:8px; padding:7px 0;
+    font-size:0.92rem;
+  }
+  .item-name{white-space:nowrap;}
+  .leader{flex:1; border-bottom:1.5px dotted rgba(36,18,9,0.4); position:relative; top:-4px;}
+  .item-price{font-family:'DM Mono',monospace; font-weight:500; white-space:nowrap;}
+  .item-note{
+    display:block; font-size:0.76rem; color:rgba(36,18,9,0.6); font-style:italic;
+    margin-top:-4px; margin-bottom:6px; line-height:1.4;
+  }
+  .shake-head{display:flex; font-family:'DM Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--rust); gap:8px; margin-top:4px;}
+  .shake-head span{margin-left:auto; width:38px; text-align:right;}
+  .shake-row{display:flex; align-items:baseline; gap:8px; padding:6px 0; font-size:0.92rem;}
+  .shake-row .p1, .shake-row .p2{font-family:'DM Mono',monospace; width:38px; text-align:right; font-weight:500;}
+
+  /* ===== GALLERY / VIBE ===== */
+  .vibe{background:var(--espresso-2);}
+  .vibe-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+  @media (max-width:800px){ .vibe-grid{grid-template-columns:1fr;} }
+  .vibe-text h2{font-size:clamp(2.2rem,5vw,3rem); color:var(--parchment);}
+  .vibe-text p{margin-top:18px; color:rgba(246,236,217,0.72); line-height:1.7; font-size:1rem;}
+  .vibe-quotes{display:flex; flex-direction:column; gap:16px;}
+  .quote-card{
+    background:rgba(246,236,217,0.06); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px; font-size:0.9rem; color:rgba(246,236,217,0.85);
+  }
+  .quote-card b{display:block; color:var(--mustard); font-family:'Caveat',cursive; font-size:1.3rem; margin-bottom:4px;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--ink); padding:64px 0 28px; border-top:1px solid var(--line);}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px;}
+  @media (max-width:760px){ .foot-grid{grid-template-columns:1fr; gap:32px;} }
+  .foot-brand{font-family:'Caveat',cursive; font-size:2.1rem; color:var(--parchment);}
+  .foot-brand + p{color:rgba(246,236,217,0.6); margin-top:10px; font-size:0.88rem; line-height:1.6; max-width:280px;}
+  footer h5{font-family:'DM Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--mustard); margin-bottom:14px;}
+  footer .floc{font-size:0.88rem; line-height:1.6; color:rgba(246,236,217,0.75); margin-bottom:18px;}
+  footer .floc b{color:var(--parchment); display:block; margin-bottom:2px;}
+  .foot-bottom{
+    margin-top:50px; padding-top:24px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:0.78rem; color:rgba(246,236,217,0.45);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">
+      <span class="cup">☕</span>
+      <span class="brand-name">Cafe Crew</span>
+    </div>
+    <div class="navlinks">
+      <a href="#locations">Locations</a>
+      <a href="#menu">Menu</a>
+      <a href="#vibe">The Vibe</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="tel:+918928408249">Call Seawoods</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">Navi Mumbai · Since the last all-nighter</p>
+  <h1>Fuel the<br><span>whole crew.</span></h1>
+  <p class="tag">Pocket-friendly pizzas, loaded freak shakes, and the kind of masala Maggi that gets its own backstory. Two spots, one crew, zero pretense.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="#menu">See the menu</a>
+    <a class="btn btn-ghost" href="#locations">Find your nearest table</a>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>3AM WAALI MAGGI · ₹50</span>
+    <span>XL KA BAAP BURGER</span>
+    <span>DEEP DISH · IF YOU EAT IT ALONE, YOU'RE A FOOD MONSTER</span>
+    <span>FREE WI-FI · SEAWOODS</span>
+    <span>KID'S BIRTHDAY PARTIES · CBD BELAPUR</span>
+    <span>NUTELLA HOT CHOCOLATE · 'COZ NUTELLA CAN GO ANYWHERE</span>
+    <span>OPEN ALL 7 DAYS</span>
+    <span>3AM WAALI MAGGI · ₹50</span>
+    <span>XL KA BAAP BURGER</span>
+    <span>DEEP DISH · IF YOU EAT IT ALONE, YOU'RE A FOOD MONSTER</span>
+    <span>FREE WI-FI · SEAWOODS</span>
+    <span>KID'S BIRTHDAY PARTIES · CBD BELAPUR</span>
+    <span>NUTELLA HOT CHOCOLATE · 'COZ NUTELLA CAN GO ANYWHERE</span>
+    <span>OPEN ALL 7 DAYS</span>
+  </div>
+</div>
+
+<section class="locations" id="locations">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Two spots</p>
+      <h2>Pick your crew's corner</h2>
+      <p>Same easy prices, same fast-food comfort — a five-minute walk from wherever you already are.</p>
+    </div>
+
+    <div class="loc-grid">
+
+      <div class="loc-card">
+        <span class="tab">Seawoods</span>
+        <h3>Cafe Crew — Seawoods</h3>
+        <div class="loc-row">
+          <span class="ic">📍</span>
+          <div>Shop No. 13, Plot No. 41, Shree Ambika Niwas, Sector 42, Seawoods West, Navi Mumbai, Maharashtra 400706<br><span style="opacity:0.65">Landmark: near L&amp;T Grand Central Mall</span></div>
+        </div>
+        <div class="loc-row"><span class="ic">📞</span><div><a href="tel:+918928408249">+91 89284 08249</a></div></div>
+        <div class="loc-row"><span class="ic">🕚</span><div>Mon – Sun, 12:00 PM – 11:00 PM</div></div>
+
+        <div class="loc-meta">
+          <div class="meta-chip"><b>Avg. cost</b>₹200 – ₹400 / person</div>
+          <div class="meta-chip"><b>Good for</b>Quick bites, solo &amp; small groups</div>
+          <div class="meta-chip"><b>Parking</b>Street parking, can be tight</div>
+        </div>
+
+        <p class="loc-specials"><b>Known for:</b> Signature Chicken Pizza, XL Ka Baap Burger, Honey Chilli Potato, Roast Chicken Sandwich, Irish Frappes &amp; loaded Freak Shakes. Free Wi-Fi, plus delivery and takeaway.</p>
+
+        <div class="loc-actions">
+          <a class="solid" href="tel:+918928408249">Call to order</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Cafe+Crew+Seawoods+Sector+42+Navi+Mumbai" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <span class="tab">CBD Belapur</span>
+        <h3>Cafe Crew — CBD Belapur</h3>
+        <div class="loc-row">
+          <span class="ic">📍</span>
+          <div>Shop No. 19, Vishnu Complex, Plot No. 36, Sector 15, CBD Belapur, Navi Mumbai, Maharashtra 400614</div>
+        </div>
+        <div class="loc-row"><span class="ic">📞</span><div><a href="tel:+919930429191">+91 99304 29191</a></div></div>
+        <div class="loc-row"><span class="ic">🕚</span><div>Mon – Sun, 11:30 AM – 10:30 PM</div></div>
+
+        <div class="loc-meta">
+          <div class="meta-chip"><b>Avg. cost</b>₹200 – ₹400 / person</div>
+          <div class="meta-chip"><b>Good for</b>Birthday &amp; group celebrations</div>
+          <div class="meta-chip"><b>Parking</b>Free lot + ample street parking</div>
+        </div>
+
+        <p class="loc-specials"><b>Known for:</b> Burger ka Baap, Crew Frappe (₹225), a wide spread of small plates, and premium coffee &amp; desserts. Trendier ambiance, rated high on hygiene and prompt service.</p>
+
+        <div class="loc-actions">
+          <a class="solid" href="tel:+919930429191">Call to order</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Cafe+Crew+CBD+Belapur+Sector+15+Navi+Mumbai" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="specials-strip">
+      <div class="spec-item"><div class="num">01</div><h4>XL Ka Baap Burger</h4><p>The one everyone orders twice</p></div>
+      <div class="spec-item"><div class="num">02</div><h4>Deep Dish Pizza</h4><p>Eat it alone, become a legend</p></div>
+      <div class="spec-item"><div class="num">03</div><h4>Freak Shakes</h4><p>Kitkat to Bounty, basic or freak</p></div>
+      <div class="spec-item"><div class="num">04</div><h4>3AM Waali Maggi</h4><p>For the nights that got away</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The full spread</p>
+      <h2>Order chit</h2>
+      <p>Same menu, both outlets. Prices in ₹.</p>
+    </div>
+
+    <div class="menu-toggle">
+      <button id="btn-food" class="active" onclick="showMenu('food')">Food</button>
+      <button id="btn-bev" onclick="showMenu('bev')">Beverages</button>
+    </div>
+
+    <!-- FOOD -->
+    <div id="menu-food" class="ticket-grid">
+
+      <div class="ticket">
+        <h3>Fabulous Fries</h3>
+        <span class="sub">Fries</span>
+        <div class="item-row"><span class="item-name">Salted</span><span class="leader"></span><span class="item-price">₹80</span></div>
+        <div class="item-row"><span class="item-name">Peri Peri</span><span class="leader"></span><span class="item-price">₹90</span></div>
+        <div class="item-row"><span class="item-name">Pizza</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <span class="item-note">Imagine fries as a base of a pizza</span>
+        <div class="item-row"><span class="item-name">Smoky</span><span class="leader"></span><span class="item-price">₹130</span></div>
+        <span class="item-note">No combination from A–Z can describe this — better order to experience</span>
+        <div class="item-row"><span class="item-name">Make Your Own Fries</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <span class="item-note">Chipotle, Chilly Garlic, Sweet Chilly, Cheesy, BBQ</span>
+      </div>
+
+      <div class="ticket">
+        <h3>Garlic Bread</h3>
+        <span class="sub">Bakes</span>
+        <div class="item-row"><span class="item-name">Classic</span><span class="leader"></span><span class="item-price">₹90</span></div>
+        <div class="item-row"><span class="item-name">Cheesy</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <div class="item-row"><span class="item-name">Sweet Corn</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">Masala</span><span class="leader"></span><span class="item-price">₹130</span></div>
+        <div class="item-row"><span class="item-name">Pull Apart</span><span class="leader"></span><span class="item-price">₹180</span></div>
+        <span class="item-note">Bound with love (and cheese). Try to separate them.</span>
+      </div>
+
+      <div class="ticket">
+        <h3>Appetizers</h3>
+        <span class="sub">To start</span>
+        <div class="item-row"><span class="item-name">Dynabite</span><span class="leader"></span><span class="item-price">₹130</span></div>
+        <div class="item-row"><span class="item-name">Pizza Chilly Poppers</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Pasta Cutlet</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Veggie Roll</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">Potato Wedges</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <div class="item-row"><span class="item-name">Paneer Room Roll</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">Christmas Bell</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <span class="item-note">Red bell pepper stuffed with potato, pomegranate &amp; cheese</span>
+        <div class="item-row"><span class="item-name">Nachos</span><span class="leader"></span><span class="item-price">₹130</span></div>
+        <div class="item-row"><span class="item-name">Honey Chilli Potato</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <div class="item-row"><span class="item-name">Vegetable Salad</span><span class="leader"></span><span class="item-price">₹110</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Pasta</h3>
+        <span class="sub">Mains</span>
+        <div class="item-row"><span class="item-name">Alfredo</span><span class="leader"></span><span class="item-price">₹205</span></div>
+        <div class="item-row"><span class="item-name">Arabiatta</span><span class="leader"></span><span class="item-price">₹215</span></div>
+        <div class="item-row"><span class="item-name">Pink Sauce</span><span class="leader"></span><span class="item-price">₹215</span></div>
+        <div class="item-row"><span class="item-name">Pesto</span><span class="leader"></span><span class="item-price">₹230</span></div>
+        <div class="item-row"><span class="item-name">Al Fungi</span><span class="leader"></span><span class="item-price">₹235</span></div>
+        <span class="item-note">White sauce pasta cooked with button mushroom</span>
+        <div class="item-row"><span class="item-name">Baked Pasta</span><span class="leader"></span><span class="item-price">₹230</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Sandwich</h3>
+        <span class="sub">Handheld</span>
+        <div class="item-row"><span class="item-name">Cole Slaw</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <span class="item-note">Shredded cabbage and bell peppers dressed in mayo</span>
+        <div class="item-row"><span class="item-name">Mexican</span><span class="leader"></span><span class="item-price">₹115</span></div>
+        <span class="item-note">Spiceful blend of bell peppers, onion and corn</span>
+        <div class="item-row"><span class="item-name">Super Spicy Sandwich</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <span class="item-note">Devil's preferred</span>
+        <div class="item-row"><span class="item-name">Vegetable Cheese</span><span class="leader"></span><span class="item-price">₹115</span></div>
+        <div class="item-row"><span class="item-name">Traditional Tikka</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Triple Decker</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Smoky Paneer Sandwich</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Three Cheese</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Chocolate</span><span class="leader"></span><span class="item-price">₹140</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Panini</h3>
+        <span class="sub">Pressed</span>
+        <div class="item-row"><span class="item-name">Russian Salad</span><span class="leader"></span><span class="item-price">₹130</span></div>
+        <span class="item-note">From Russia to Seawoods</span>
+        <div class="item-row"><span class="item-name">Cottage Cheese</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Mushroom</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Fiery Devil</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <span class="item-note">Devil prefers this as well</span>
+      </div>
+
+      <div class="ticket">
+        <h3>Pizza</h3>
+        <span class="sub">Wood-fired favourites</span>
+        <div class="item-row"><span class="item-name">Margherita</span><span class="leader"></span><span class="item-price">₹200</span></div>
+        <div class="item-row"><span class="item-name">Spicy Paneer</span><span class="leader"></span><span class="item-price">₹230</span></div>
+        <span class="item-note">Well, you guessed it — this is what the Devil orders</span>
+        <div class="item-row"><span class="item-name">Volcano</span><span class="leader"></span><span class="item-price">₹220</span></div>
+        <div class="item-row"><span class="item-name">BBQ Paneer</span><span class="leader"></span><span class="item-price">₹320</span></div>
+        <div class="item-row"><span class="item-name">Tropical</span><span class="leader"></span><span class="item-price">₹240</span></div>
+        <span class="item-note">No pine, no apple — only pineapple</span>
+        <div class="item-row"><span class="item-name">Sliders</span><span class="leader"></span><span class="item-price">₹220</span></div>
+        <span class="item-note">Now imagine fries as a topping of a pizza</span>
+        <div class="item-row"><span class="item-name">Gumnaam</span><span class="leader"></span><span class="item-price">₹300</span></div>
+        <span class="item-note">The creator loved it so much, he forgot to name it</span>
+        <div class="item-row"><span class="item-name">Signature</span><span class="leader"></span><span class="item-price">₹350</span></div>
+        <div class="item-row"><span class="item-name">Deep Dish</span><span class="leader"></span><span class="item-price">₹400</span></div>
+        <span class="item-note">If you eat it alone, trust me — you're a food monster</span>
+      </div>
+
+    </div>
+
+    <!-- BEVERAGES -->
+    <div id="menu-bev" class="ticket-grid" style="display:none;">
+
+      <div class="ticket">
+        <h3>Maggi</h3>
+        <span class="sub">Late-night ritual</span>
+        <div class="item-row"><span class="item-name">3AM Waali Maggi</span><span class="leader"></span><span class="item-price">₹50</span></div>
+        <span class="item-note">Remember that time when, instead of studies, you were busy in something else 😊</span>
+        <div class="item-row"><span class="item-name">Double Masala</span><span class="leader"></span><span class="item-price">₹55</span></div>
+        <div class="item-row"><span class="item-name">Vegetable</span><span class="leader"></span><span class="item-price">₹85</span></div>
+        <div class="item-row"><span class="item-name">Corn and Cheese</span><span class="leader"></span><span class="item-price">₹85</span></div>
+        <div class="item-row"><span class="item-name">Mushroom Masala</span><span class="leader"></span><span class="item-price">₹85</span></div>
+        <div class="item-row"><span class="item-name">Paneer Chilly</span><span class="leader"></span><span class="item-price">₹90</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Burgers</h3>
+        <span class="sub">Handheld</span>
+        <div class="item-row"><span class="item-name">Aloo Tikki</span><span class="leader"></span><span class="item-price">₹70</span></div>
+        <div class="item-row"><span class="item-name">BBQ</span><span class="leader"></span><span class="item-price">₹90</span></div>
+        <div class="item-row"><span class="item-name">Mexican</span><span class="leader"></span><span class="item-price">₹95</span></div>
+        <div class="item-row"><span class="item-name">Paneer Spicy Grilled</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">XL Burger</span><span class="leader"></span><span class="item-price">₹125</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Frappe &amp; Cold Coffee</h3>
+        <span class="sub">Blended</span>
+        <div class="item-row"><span class="item-name">Chilo Coffee</span><span class="leader"></span><span class="item-price">₹115</span></div>
+        <div class="item-row"><span class="item-name">Frappe Brew</span><span class="leader"></span><span class="item-price">₹135</span></div>
+        <div class="item-row"><span class="item-name">Irish Frappe</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Hazelnut Frappe</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Caramel Frappe</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Choco Frappe</span><span class="leader"></span><span class="item-price">₹150</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Tea</h3>
+        <span class="sub">Classic</span>
+        <div class="item-row"><span class="item-name">Green Tea</span><span class="leader"></span><span class="item-price">₹75</span></div>
+        <div class="item-row"><span class="item-name">Masala Tea</span><span class="leader"></span><span class="item-price">₹75</span></div>
+        <div class="item-row"><span class="item-name">Lemon Tea</span><span class="leader"></span><span class="item-price">₹75</span></div>
+        <div class="item-row"><span class="item-name">Kashmiri Kahwa</span><span class="leader"></span><span class="item-price">₹75</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Shakes</h3>
+        <span class="sub">Basic or go full Freak</span>
+        <div class="shake-head"><span>&nbsp;</span><span>Basic</span><span>Freak</span></div>
+        <div class="shake-row"><span class="item-name">Kitkat</span><span class="leader"></span><span class="p1">₹150</span><span class="p2">₹180</span></div>
+        <div class="shake-row"><span class="item-name">Oreo</span><span class="leader"></span><span class="p1">₹150</span><span class="p2">₹180</span></div>
+        <div class="shake-row"><span class="item-name">Toblerone</span><span class="leader"></span><span class="p1">₹160</span><span class="p2">₹200</span></div>
+        <div class="shake-row"><span class="item-name">Oreo Cheesecake</span><span class="leader"></span><span class="p1">₹160</span><span class="p2">₹190</span></div>
+        <div class="shake-row"><span class="item-name">Ferrero</span><span class="leader"></span><span class="p1">₹200</span><span class="p2">—</span></div>
+        <div class="shake-row"><span class="item-name">Brownie</span><span class="leader"></span><span class="p1">₹155</span><span class="p2">₹180</span></div>
+        <div class="shake-row"><span class="item-name">Red Velvet</span><span class="leader"></span><span class="p1">₹150</span><span class="p2">₹200</span></div>
+        <div class="shake-row"><span class="item-name">Nutella</span><span class="leader"></span><span class="p1">₹150</span><span class="p2">₹180</span></div>
+        <div class="shake-row"><span class="item-name">Biscuitino</span><span class="leader"></span><span class="p1">₹140</span><span class="p2">₹160</span></div>
+        <div class="shake-row"><span class="item-name">Bounty</span><span class="leader"></span><span class="p1">₹160</span><span class="p2">₹190</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Dessert</h3>
+        <span class="sub">Sweet finish</span>
+        <div class="item-row"><span class="item-name">Sizzling Brownie</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Sundae Blast</span><span class="leader"></span><span class="item-price">₹215</span></div>
+        <div class="item-row"><span class="item-name">Dark Magic</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Choco Fantasy Temptation</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Ferrero Sundae</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Make Your Own Waffle</span><span class="leader"></span><span class="item-price">₹170</span></div>
+        <span class="item-note">Caramel Whisky, Dark Rum, Nutella, Kit-Kat</span>
+      </div>
+
+      <div class="ticket">
+        <h3>Coffee</h3>
+        <span class="sub">Roasted &amp; brewed</span>
+        <div class="item-row"><span class="item-name">Espresso</span><span class="leader"></span><span class="item-price">₹65</span></div>
+        <div class="item-row"><span class="item-name">Americano</span><span class="leader"></span><span class="item-price">₹75</span></div>
+        <div class="item-row"><span class="item-name">Black Coffee</span><span class="leader"></span><span class="item-price">₹80</span></div>
+        <div class="item-row"><span class="item-name">Irish Coffee</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">Cappuccino</span><span class="leader"></span><span class="item-price">₹95</span></div>
+        <div class="item-row"><span class="item-name">Café Latte</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <span class="item-note">Mocha, Hazelnut, Irish, Vanilla or Caramel</span>
+        <div class="item-row"><span class="item-name">Glitter Coffee</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">Café Affogato</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <div class="item-row"><span class="item-name">Choco Chino</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <div class="item-row"><span class="item-name">Nutella Hot Chocolate</span><span class="leader"></span><span class="item-price">₹100</span></div>
+        <span class="item-note">'Coz Nutella can go anywhere</span>
+      </div>
+
+      <div class="ticket">
+        <h3>Iced Tea</h3>
+        <span class="sub">Chilled</span>
+        <div class="item-row"><span class="item-name">LIT</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">Cranberry</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">Peach</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">WaterMelon</span><span class="leader"></span><span class="item-price">₹120</span></div>
+      </div>
+
+      <div class="ticket">
+        <h3>Mocktail</h3>
+        <span class="sub">Zero-proof</span>
+        <div class="item-row"><span class="item-name">Mojito</span><span class="leader"></span><span class="item-price">₹110</span></div>
+        <div class="item-row"><span class="item-name">Black Mojito</span><span class="leader"></span><span class="item-price">₹120</span></div>
+        <div class="item-row"><span class="item-name">Pina Colada</span><span class="leader"></span><span class="item-price">₹150</span></div>
+        <div class="item-row"><span class="item-name">Rose Colada</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Devil StrawBerry</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Kiwi</span><span class="leader"></span><span class="item-price">₹140</span></div>
+        <div class="item-row"><span class="item-name">Green Apple</span><span class="leader"></span><span class="item-price">₹140</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="vibe" id="vibe">
+  <div class="wrap">
+    <div class="vibe-grid">
+      <div class="vibe-text">
+        <p class="eyebrow">The vibe</p>
+        <h2>Written by whoever named the Gumnaam pizza</h2>
+        <p>Every menu has a joke hiding in it — because Cafe Crew isn't trying to be fancy, it's trying to be your regular spot. Seawoods keeps it cozy for solo laptop sessions and small hangouts. CBD Belapur turns up the polish for birthday parties and bigger crews, with a free parking lot so nobody's circling the block.</p>
+        <p>Both outlets: pocket-friendly (₹200–₹400 a head), family-friendly, and open every single day.</p>
+      </div>
+      <div class="vibe-quotes">
+        <div class="quote-card"><b>On the Smoky Fries</b>"No combination from letter A–Z can describe this. Better order to experience."</div>
+        <div class="quote-card"><b>On the Deep Dish</b>"If you eat it alone, trust me, you are a food monster."</div>
+        <div class="quote-card"><b>On the Nutella Hot Chocolate</b>"'Coz Nutella can go anywhere."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Cafe Crew</div>
+        <p>Two easy-going outlets across Navi Mumbai serving pizzas, burgers, frappes and shakes to whoever shows up.</p>
+      </div>
+      <div>
+        <h5>Seawoods</h5>
+        <div class="floc">
+          <b>Shop 13, Sector 42</b>
+          Near L&amp;T Grand Central Mall<br>
+          <a href="tel:+918928408249">+91 89284 08249</a><br>
+          12:00 PM – 11:00 PM daily
+        </div>
+      </div>
+      <div>
+        <h5>CBD Belapur</h5>
+        <div class="floc">
+          <b>Shop 19, Sector 15</b>
+          Vishnu Complex<br>
+          <a href="tel:+919930429191">+91 99304 29191</a><br>
+          11:30 AM – 10:30 PM daily
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cafe Crew, Navi Mumbai</span>
+      <span>Map data © 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showMenu(which){
+    document.getElementById('menu-food').style.display = which === 'food' ? 'grid' : 'none';
+    document.getElementById('menu-bev').style.display = which === 'bev' ? 'grid' : 'none';
+    document.getElementById('btn-food').classList.toggle('active', which === 'food');
+    document.getElementById('btn-bev').classList.toggle('active', which === 'bev');
+  }
+</script>
+
+</body>
+</html>
